@@ -144,15 +144,14 @@ if __name__ == '__main__':
                              args.hidden_dim,
                              args.output_dim).to(device)
 
-    ## TODO: Define an optimizer and loss function for training
+    # Define an optimizer and loss function for training
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
     criterion = nn.BCELoss()
 
     # Trains the model (given line of code, which calls the above training function)
     train(model, train_loader, args.epochs, criterion, optimizer, device)
 
-    ## TODO: complete in the model_info by adding three argument names, the first is given
-    # Keep the keys of this dictionary as they are 
+    # Saving model
     model_info_path = os.path.join(args.model_dir, 'model_info.pth')
     with open(model_info_path, 'wb') as f:
         model_info = {
@@ -160,10 +159,7 @@ if __name__ == '__main__':
             'hidden_dim': args.hidden_dim,
             'output_dim': args.output_dim,
         }
-        torch.save(model_info, f)
-        
-    ## --- End of your code  --- ##
-    
+        torch.save(model_info, f)    
 
 	# Save the model parameters
     model_path = os.path.join(args.model_dir, 'model.pth')
