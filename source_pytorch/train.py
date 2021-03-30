@@ -64,7 +64,7 @@ def train(model, train_loader, epochs, criterion, optimizer, device):
     device       - Where the model and data should be loaded (gpu or cpu).
     """
     
-    # training loop is provided
+    # training loop
     for epoch in range(1, epochs + 1):
         model.train() # Make sure that the model is in training mode.
 
@@ -92,7 +92,6 @@ def train(model, train_loader, epochs, criterion, optimizer, device):
         print("Epoch: {}, Loss: {}".format(epoch, total_loss / len(train_loader)))
 
 
-## TODO: Complete the main code
 if __name__ == '__main__':
     
     # All of the model parameters and training parameters are sent as arguments
@@ -102,7 +101,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     # SageMaker parameters, like the directories for training data and saving models; set automatically
-    # Do not need to change
     parser.add_argument('--output-data-dir', type=str, default=os.environ['SM_OUTPUT_DATA_DIR'])
     parser.add_argument('--model-dir', type=str, default=os.environ['SM_MODEL_DIR'])
     parser.add_argument('--data-dir', type=str, default=os.environ['SM_CHANNEL_TRAIN'])
@@ -115,7 +113,7 @@ if __name__ == '__main__':
     parser.add_argument('--seed', type=int, default=1, metavar='S',
                         help='random seed (default: 1)')
     
-    ## TODO: Add args for the three model parameters: input_features, hidden_dim, output_dim
+    # Add args for the three model parameters: input_features, hidden_dim, output_dim
     # Model Parameters
     parser.add_argument('--input_features', type=int, default=3, metavar='IN',
                         help='number of input features to model (default: 3)')
@@ -138,12 +136,10 @@ if __name__ == '__main__':
     # Load the training data.
     train_loader = _get_train_data_loader(args.batch_size, args.data_dir)
 
-
-    ## --- Your code here --- ##
     
-    ## TODO:  Build the model by passing in the input params
+    # Build the model by passing in the input params
     # To get params from the parser, call args.argument_name, ex. args.epochs or ards.hidden_dim
-    # Don't forget to move your model .to(device) to move to GPU , if appropriate
+    # Move model .to(device) to move to GPU , if appropriate
     model = BinaryClassifier(args.input_features,
                              args.hidden_dim,
                              args.output_dim).to(device)
