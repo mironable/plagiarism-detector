@@ -3,7 +3,6 @@ import torch.nn.functional as F
 import torch.nn as nn
 
 
-## TODO: Complete this classifier
 class BinaryClassifier(nn.Module):
     """
     Define a neural network that performs binary classification.
